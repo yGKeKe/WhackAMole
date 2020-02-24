@@ -49,9 +49,6 @@ public class MainActivity extends AppCompatActivity {
         tvScoreTracker = findViewById(R.id.tvScoreTracker);
         btnStart = findViewById(R.id.btnStart);
         tvMissedWhacks = findViewById(R.id.tvMissedWhacks);
-        tvScoreTracker = findViewById(R.id.tvScoreTracker);
-        tvScore = findViewById(R.id.tvScore);
-        tvScore = findViewById(R.id.tvScore);
         ivMoleView = new ImageView[16];
         ranNum = new Random();
         handler = new Handler();
@@ -59,9 +56,6 @@ public class MainActivity extends AppCompatActivity {
         mtTimer = new MoleTimer();
         counter = new Counter();
         intHighScore = 0;
-        intMoleLoc = ranNum.nextInt(16);
-        intScore = 0;
-        firstTick = true;
     }
 
     public void startPressed(View v) {
@@ -105,9 +99,8 @@ public class MainActivity extends AppCompatActivity {
                 intMissedWhacks++;
                 tvMissedWhacks.setText("Missed Whacks: " + intMissedWhacks);
                 handler.removeCallbacks(wamMachine);
-                handler.removeCallbacks(mtTimer);
                 handler.postDelayed(mtTimer, intInterval);
-                handler.postDelayed(wamMachine, intInterval);
+                handler.postDelayed(wamMachine, 0);
             }
         }
     }
@@ -138,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
                     intScore++;
                     tvScoreTracker.setText(intScore +"");
                     handler.removeCallbacks(mtTimer);
-                    handler.removeCallbacks(wamMachine);
                     handler.postDelayed(wamMachine, 0);
                     handler.postDelayed(mtTimer, 0);
                 }
